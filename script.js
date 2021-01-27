@@ -1,14 +1,18 @@
-function Book(title, author, pages, read) {
+let myLibrary = [];
+
+function Book(title, author, pages, read = false) {
   this.title = title
   this.author = author
   this.pages = pages
   this.read = read
-  
-  this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${read ? 'read' : 'has not read yet'}`;
-  }
 }
 
-const sorcerorsStone = new Book("Harry Potter and The Sorceror's Stone", "J.K. Rowling", 223, true);
+Book.prototype.info = function () {
+  return `${this.title} by ${this.author}, ${this.pages} pages, read: ${this.read ? 'yes' : 'no'}`;
+}
+
+const sorcerorsStone = new Book("Harry Potter and The Sorceror's Stone", "J.K. Rowling", 223, false);
+const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 310, true);
 
 console.log(sorcerorsStone.info());
+console.log(theHobbit.info());
