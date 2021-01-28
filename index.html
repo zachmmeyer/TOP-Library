@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="add-book-container">
-    <form>
+    <form name="add-book-form" onsubmit="addBookToLibrary()">
       <label for="title">Title:</label>
       <input type="text" id="title" name="title"><br><br>
       <label for="author">Author:</label>
@@ -18,10 +18,12 @@
       <label for="read">Read:</label>
       <input type="checkbox" id="read" name="read"><br><br>
       <input type="submit" value="Submit">
-      <input type="reset" value="Reset">
+      <input type="reset" value="Reset"><br><br>
+      <label for="clearStorage">Clear Storage:</label>
+      <input type="checkbox" id="clearStorage" name="clearStorage">
     </form>
   </div>
-
+  <div class="library-container"></div>
   <script src="script.js"></script>
 </body>
 </html>
