@@ -1,5 +1,6 @@
 let myLibrary;
 
+//Check for existing library in storage
 if (!localStorage.getItem("myLibrary")) {
   myLibrary = new Array();
   console.log("Initializing new library");
