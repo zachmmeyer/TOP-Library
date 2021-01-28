@@ -33,10 +33,6 @@ function addBookToLibrary() {
   } else if (formTitle == "" || formAuthor == "" || formPages == "") {
     //Does not submit book missing information to library
   } else {
-    const formTitle = document.forms["add-book-form"]["title"].value;
-    const formAuthor = document.forms["add-book-form"]["author"].value;
-    const formPages = document.forms["add-book-form"]["pages"].value;
-    const formRead = document.forms["add-book-form"]["read"].value;
     const book = new Book(formTitle, formAuthor, formPages, formRead);
     myLibrary.push(book);
     localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
