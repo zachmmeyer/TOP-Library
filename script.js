@@ -1,14 +1,39 @@
-let myLibrary;
+function Library() {
+  this.books = [];
+  
+  this.loadFromLocalStorage = () => {
+    const tempBooks = localStorage.getItem("books");
+    if (tempBooks) {
+      this.books = JSON.parse(tempBooks);
+    }
+  }
 
-//Check for existing library in storage
-if (!localStorage.getItem("myLibrary")) {
-  myLibrary = new Array();
-  console.log("Initializing new library");
-} else {
-  const tempLibrary = localStorage.getItem("myLibrary");
-  myLibrary = JSON.parse(tempLibrary);
-  console.log("Restoring library from storage");
-}
+  this.push = (book) => {
+    this.books.push(book);
+    localStorage.setItem("books", JSON.stringify(this.books));
+  }
+
+  this.clear = () => {
+    localStorage.clear();
+    this.books = [];
+  }
+};
+
+const myLibrary = new Library();
+myLibrary.loadFromLocalStorage();
+console.log(myLibrary.books);
+
+const bookForm = document.querySelector("#add-book-form");
+bookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  addBookToLibrary();
+  bookForm.reset();
+});
+
+const clearStorage = document.querySelector("#clearStorage");
+clearStorage.addEventListener("click", () => {
+  myLibrary.clear();
+})
 
 function Book(title, author, pages, read = false) {
   this.title = title;
@@ -29,15 +54,10 @@ function addBookToLibrary() {
   const formPages = document.forms["add-book-form"]["pages"].value;
   const formRead = document.forms["add-book-form"]["read"].value;
 
-  if (document.forms["add-book-form"]["clearStorage"].checked) {
-    localStorage.clear();
-  } else if (formTitle == "" || formAuthor == "" || formPages == "") {
+  if (formTitle == "" || formAuthor == "" || formPages == "") {
     //Does not submit book missing information to library
   } else {
     const book = new Book(formTitle, formAuthor, formPages, formRead);
     myLibrary.push(book);
-    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
   }
 }
-
-console.log(myLibrary);
